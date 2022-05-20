@@ -16,6 +16,12 @@ async function odooRestApiRequest(method, endpoint, body = {}, qs = {}) {
         gzip: true,
         rejectUnauthorized: false,
     };
+    if (method === 'create') {
+        options.headers = {
+            'api-key': `${credentials.apiToken}`,
+            'content-type': 'http',
+        };
+    }
     if (Object.keys(qs).length === 0) {
         delete options.qs;
     }
