@@ -16,7 +16,7 @@ async function odooRestApiRequest(method, endpoint, body = {}, qs = {}) {
         gzip: true,
         rejectUnauthorized: false,
     };
-    if (method === 'create') {
+    if (method === 'Post') {
         options.headers = {
             'api-key': `${credentials.apiToken}`,
             'content-type': 'http',
