@@ -38,6 +38,10 @@ class OdooRest {
                             value: 'res.users',
                         },
                         {
+                            name: 'Project Task',
+                            value: 'project.task',
+                        },
+                        {
                             name: 'LogNote',
                             value: 'mail.message',
                         },
