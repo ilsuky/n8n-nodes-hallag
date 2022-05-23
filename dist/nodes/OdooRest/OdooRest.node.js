@@ -42,6 +42,9 @@ class OdooRest {
                             value: 'project.task',
                         },
                         {
+                            name: 'Sale Order',
+                            value: 'sale.order',
+                        }, {
                             name: 'LogNote',
                             value: 'mail.message',
                         },
