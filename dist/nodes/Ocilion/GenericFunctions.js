@@ -6,7 +6,9 @@ async function ocilionApiRequest(method, endpoint, body = {}, qs = {}, cookie) {
     const credentials = await this.getCredentials('ocilion');
     const options = {
         headers: {
-            Cookie: cookie,
+            'Cookie': cookie,
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
         },
         method,
         body,

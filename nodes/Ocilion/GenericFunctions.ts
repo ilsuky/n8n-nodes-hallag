@@ -30,7 +30,9 @@ export async function ocilionApiRequest(
 
 	const options: OptionsWithUri = {
 		headers: {
-			Cookie: cookie,
+			'Cookie': cookie,
+			'Content-Type': 'application/json',
+			'Accept': '*/*',
 		},
 		method,
 		body,
