@@ -111,6 +111,20 @@ class Ocilion {
                     default: true,
                     description: 'Retrieve and Split Data array into seperate Items',
                 },
+                {
+                    displayName: 'Body',
+                    name: 'body',
+                    type: 'string',
+                    displayOptions: {
+                        show: {
+                            operation: [
+                                'create',
+                            ],
+                        },
+                    },
+                    default: '',
+                    description: 'Request body',
+                },
             ],
         };
     }
