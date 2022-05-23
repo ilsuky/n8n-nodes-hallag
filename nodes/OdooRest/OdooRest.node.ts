@@ -49,7 +49,12 @@ export class OdooRest implements INodeType {
 					{
 						name: 'Sale Order',
 						value: 'sale.order',
-					},					{
+					},
+					{
+						name: 'Sale Order Line',
+						value: 'sale.order.line',
+					},
+					{
 						name: 'LogNote',
 						value: 'mail.message',
 					},
