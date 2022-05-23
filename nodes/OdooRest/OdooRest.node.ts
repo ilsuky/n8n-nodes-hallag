@@ -314,7 +314,7 @@ export class OdooRest implements INodeType {
 					const endpoint = resource + '/create';
 					let jsonBody = {};
 					if(body && body.length>0){
-						jsonBody = JSON.parse(body);
+						jsonBody = JSON.parse(JSON.stringify(body))
 					}
 
 					item = items[itemIndex];
