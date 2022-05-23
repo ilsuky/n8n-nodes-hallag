@@ -34,6 +34,9 @@ export class OdooRest implements INodeType {
 					{
 						name: 'Partner',
 						value: 'res.partner',
+					},					{
+						name: 'Installation',
+						value: 'res.partner.installation',
 					},
 					{
 						name: 'User',

@@ -32,6 +32,9 @@ class OdooRest {
                         {
                             name: 'Partner',
                             value: 'res.partner',
+                        }, {
+                            name: 'Installation',
+                            value: 'res.partner.installation',
                         },
                         {
                             name: 'User',
