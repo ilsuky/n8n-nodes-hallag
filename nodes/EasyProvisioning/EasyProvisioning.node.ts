@@ -37,6 +37,38 @@ export class EasyProvisioning implements INodeType {
 						name: 'Customers',
 						value: 'customers',
 					},
+					{
+						name: 'Installations',
+						value: 'installations',
+					},
+					{
+						name: 'Internet Accesses',
+						value: 'internet_accesses',
+					},
+					{
+						name: 'Internet services',
+						value: 'internet_services',
+					},
+					{
+						name: 'Voice lines',
+						value: 'voice_lines',
+					},
+					{
+						name: 'Voice services',
+						value: 'voice_services',
+					},
+					{
+						name: 'TV services',
+						value: 'tv_services',
+					},
+					{
+						name: 'Wifi configurations',
+						value: 'wifi_configurations',
+					},
+					{
+						name: 'CreateLog',
+						value: 'customer_histories',
+					},
 				],
 				default: 'customers',
 				description: 'Resource to use',
