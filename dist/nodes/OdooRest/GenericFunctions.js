@@ -22,6 +22,12 @@ async function odooRestApiRequest(method, endpoint, body = {}, qs = {}) {
             'Content-Type': 'http',
         };
     }
+    if (method === 'Put') {
+        options.headers = {
+            'api-key': `${credentials.apiToken}`,
+            'Content-Type': 'http',
+        };
+    }
     if (Object.keys(qs).length === 0) {
         delete options.qs;
     }
