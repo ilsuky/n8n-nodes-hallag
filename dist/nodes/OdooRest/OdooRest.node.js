@@ -264,7 +264,7 @@ class OdooRest {
                         json: {},
                         binary: {},
                     };
-                    newItem.json = JSON.parse(await GenericFunctions_1.odooRestApiRequest.call(this, 'Put', endpoint, jsonBody, {}));
+                    newItem.json = JSON.parse(JSON.stringify(await GenericFunctions_1.odooRestApiRequest.call(this, 'Put', endpoint, jsonBody, {})));
                     returnItems.push(newItem);
                 }
                 if (operation == 'delete') {
@@ -283,7 +283,7 @@ class OdooRest {
                     const endpoint = resource + '/create';
                     let jsonBody = {};
                     if (body && body.length > 0) {
-                        jsonBody = JSON.parse(JSON.stringify(body));
+                        jsonBody = JSON.parse(body);
                     }
                     item = items[itemIndex];
                     const newItem = {
