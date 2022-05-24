@@ -81,6 +81,14 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						resource: [
 							'customers',
+							'installations',
+							'internet_accesses',
+							'internet_services',
+							'voice_lines',
+							'voice_services',
+							'tv_services',
+							'wifi_configurations',
+							'customer_histories',
 						],
 					},
 				},
