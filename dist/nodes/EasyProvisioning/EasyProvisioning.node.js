@@ -104,6 +104,11 @@ class EasyProvisioning {
                             value: 'getAll',
                             description: 'Retrieve all records',
                         },
+                        {
+                            name: 'Delete',
+                            value: 'delete',
+                            description: 'Delete a record',
+                        },
                     ],
                     default: 'get',
                     description: 'Operation to perform',
@@ -322,6 +327,17 @@ class EasyProvisioning {
                         binary: {},
                     };
                     newItem.json = await GenericFunctions_1.easyProvisioningApiRequest.call(this, 'Post', endpoint, toCreate, {}, token);
+                    returnItems.push(newItem);
+                }
+                if (operation == 'delete') {
+                    const id = this.getNodeParameter('id', itemIndex, '');
+                    const endpoint = `${resource}/${id}`;
+                    item = items[itemIndex];
+                    const newItem = {
+                        json: {},
+                        binary: {},
+                    };
+                    newItem.json = await GenericFunctions_1.easyProvisioningApiRequest.call(this, 'Delete', endpoint, {}, {}, token);
                     returnItems.push(newItem);
                 }
             }

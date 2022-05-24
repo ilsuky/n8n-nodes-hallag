@@ -108,6 +108,11 @@ export class EasyProvisioning implements INodeType {
 						value: 'getAll',
 						description: 'Retrieve all records',
 					},
+					{
+						name: 'Delete',
+						value: 'delete',
+						description: 'Delete a record',
+					},
 				],
 				default: 'get',
 				description: 'Operation to perform',
@@ -360,7 +365,25 @@ export class EasyProvisioning implements INodeType {
 					};
 					newItem.json = await easyProvisioningApiRequest.call(this,'Post', endpoint, toCreate, {},token);
 					returnItems.push(newItem);
-				}				
+				}		
+
+				//--------------------------------------------------------
+				// 						Delete
+				//--------------------------------------------------------
+				if(operation == 'delete'){
+					const id = this.getNodeParameter('id', itemIndex, '') as string;
+					const endpoint = `${resource}/${id}`;
+
+					item = items[itemIndex];
+					const newItem: INodeExecutionData = {
+						json: {},
+						binary: {},
+					};
+					newItem.json = await easyProvisioningApiRequest.call(this,'Delete', endpoint, {}, {},token);
+					
+					returnItems.push(newItem);
+				}
+				
 			} catch (error:any) {
 				if (this.continueOnFail()) {
 					returnItems.push({json:{ error: error.message}});
