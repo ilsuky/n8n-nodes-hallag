@@ -125,11 +125,12 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						operation:[
 							'get',
+							'delete',
 						],
 					},
 				},
 				default: '',
-				description: 'Id of Customer',
+				description: 'Id of Resource',
 			},
 			{
 				displayName: 'Filter Attribute',
