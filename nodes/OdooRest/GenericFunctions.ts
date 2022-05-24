@@ -44,7 +44,7 @@ export async function odooRestApiRequest(
 	if (method === 'Post') {
 		options.headers = {
 			'api-key': `${credentials.apiToken}`,
-			'content-type' : 'http',
+			'Content-Type' : 'http',
 		};
 	}
 

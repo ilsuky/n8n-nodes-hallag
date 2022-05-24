@@ -34,7 +34,8 @@ export class OdooRest implements INodeType {
 					{
 						name: 'Partner',
 						value: 'res.partner',
-					},					{
+					},					
+					{
 						name: 'Installation',
 						value: 'res.partner.installation',
 					},
@@ -45,6 +46,10 @@ export class OdooRest implements INodeType {
 					{
 						name: 'Project Task',
 						value: 'project.task',
+					},
+					{
+						name: 'Project Task Type',
+						value: 'project.task.type',
 					},					
 					{
 						name: 'Sale Order',
@@ -314,7 +319,7 @@ export class OdooRest implements INodeType {
 					const endpoint = resource + '/create';
 					let jsonBody = {};
 					if(body && body.length>0){
-						jsonBody = JSON.parse(JSON.stringify(body))
+						jsonBody = JSON.parse(body);
 					}
 
 					item = items[itemIndex];

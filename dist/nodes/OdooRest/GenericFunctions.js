@@ -19,7 +19,7 @@ async function odooRestApiRequest(method, endpoint, body = {}, qs = {}) {
     if (method === 'Post') {
         options.headers = {
             'api-key': `${credentials.apiToken}`,
-            'content-type': 'http',
+            'Content-Type': 'http',
         };
     }
     if (Object.keys(qs).length === 0) {
