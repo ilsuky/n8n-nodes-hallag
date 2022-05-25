@@ -253,7 +253,7 @@ export class SipWise implements INodeType {
 				// 						Create
 				//--------------------------------------------------------
 				if(operation == 'create'){
-					const endpoint = `${resource}`;
+					const endpoint = `${resource}/`;
 					const body = this.getNodeParameter('body', itemIndex, '') as string;
 					let requestBody:IDataObject = {};
 					if(body.length >0){

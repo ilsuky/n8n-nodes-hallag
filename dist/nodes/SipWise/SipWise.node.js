@@ -226,7 +226,7 @@ class SipWise {
                     returnItems.push(newItem);
                 }
                 if (operation == 'create') {
-                    const endpoint = `${resource}`;
+                    const endpoint = `${resource}/`;
                     const body = this.getNodeParameter('body', itemIndex, '');
                     let requestBody = {};
                     if (body.length > 0) {
