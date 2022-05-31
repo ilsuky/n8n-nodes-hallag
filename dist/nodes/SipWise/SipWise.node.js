@@ -70,6 +70,11 @@ class SipWise {
                             value: 'getAll',
                             description: 'Retrieve all records',
                         },
+                        {
+                            name: 'Update',
+                            value: 'update',
+                            description: 'Update a record',
+                        },
                     ],
                     default: 'get',
                     description: 'Operation to perform',
@@ -82,6 +87,7 @@ class SipWise {
                         show: {
                             operation: [
                                 'get',
+                                'update',
                             ],
                         },
                     },
@@ -96,6 +102,7 @@ class SipWise {
                         show: {
                             operation: [
                                 'create',
+                                'update',
                             ],
                         },
                     },
@@ -221,6 +228,27 @@ class SipWise {
                             return this.prepareOutputData(returnItems.slice(0, limit));
                         }
                     } while (data._links.next);
+                }
+                if (operation == 'update') {
+                    const id = this.getNodeParameter('id', itemIndex, '');
+                    const endpoint = `${resource}/${id}`;
+                    const body = this.getNodeParameter('body', itemIndex, '');
+                    let requestBody = {};
+                    if (body.length > 0) {
+                        try {
+                            requestBody = JSON.parse(body);
+                        }
+                        catch (error) {
+                            throw new n8n_workflow_1.NodeOperationError(this.getNode(), 'Request body is not valid JSON.');
+                        }
+                    }
+                    item = items[itemIndex];
+                    const newItem = {
+                        json: {},
+                        binary: {},
+                    };
+                    newItem.json = await GenericFunctions_1.sipWiseApiRequest.call(this, 'Put', endpoint, requestBody, {});
+                    returnItems.push(newItem);
                 }
                 if (operation == 'get') {
                     const id = this.getNodeParameter('id', itemIndex, '');

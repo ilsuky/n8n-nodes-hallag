@@ -71,6 +71,11 @@ export class SipWise implements INodeType {
 						value: 'getAll',
 						description: 'Retrieve all records',
 					},
+					{
+						name: 'Update',
+						value: 'update',
+						description: 'Update a record',
+					},					
 				],
 				default: 'get',
 				description: 'Operation to perform',
@@ -83,6 +88,7 @@ export class SipWise implements INodeType {
 					show: {
 						operation:[
 							'get',
+							'update',
 						],
 					},
 				},
@@ -97,6 +103,7 @@ export class SipWise implements INodeType {
 					show: {
 						operation:[
 							'create',
+							'update',
 						],
 					},
 				},
@@ -240,6 +247,32 @@ export class SipWise implements INodeType {
 
 					} while (data._links.next);
 				}
+				
+				//--------------------------------------------------------
+				// 						Update
+				//--------------------------------------------------------
+				if(operation == 'update'){
+					const id = this.getNodeParameter('id', itemIndex, '') as string;
+					const endpoint = `${resource}/${id}`;
+					const body = this.getNodeParameter('body', itemIndex, '') as string;
+					let requestBody:IDataObject = {};
+					if(body.length >0){
+						try {
+							requestBody = JSON.parse(body);
+						} catch (error) {
+							throw new NodeOperationError(this.getNode(), 'Request body is not valid JSON.');
+						}
+					}
+
+					item = items[itemIndex];
+					const newItem: INodeExecutionData = {
+						json: {},
+						binary: {},
+					};
+					newItem.json = await sipWiseApiRequest.call(this,'Put', endpoint, requestBody, {});
+					returnItems.push(newItem);
+				}				
+				
 				//--------------------------------------------------------
 				// 						Get
 				//--------------------------------------------------------
