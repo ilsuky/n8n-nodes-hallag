@@ -62,6 +62,11 @@ export class Ocilion implements INodeType {
 						value: 'getAll',
 						description: 'Retrieve all record',
 					},
+					{
+						name: 'Update',
+						value: 'update',
+						description: 'Update a record',
+					},					
 				],
 				default: 'get',
 				description: 'Operation to perform',
@@ -81,6 +86,7 @@ export class Ocilion implements INodeType {
 					show: {
 						operation:[
 							'get',
+							'update',
 						],
 					},
 				},
@@ -98,7 +104,7 @@ export class Ocilion implements INodeType {
 						],
 					},
 				},
-				default: '',
+				default: '[{"property":"","value":"","op":"="}]',
 				description: 'Filter to apply',
 			},
 			{
@@ -123,6 +129,7 @@ export class Ocilion implements INodeType {
 					show: {
 						operation:[
 							'create',
+							'update',
 						],
 					},
 				},
@@ -164,7 +171,32 @@ export class Ocilion implements INodeType {
 					newItem.json = await ocilionApiRequest.call(this,'Get', endpoint, {}, {},cookie);
 					returnItems.push(newItem);
 				}
-
+				
+				//--------------------------------------------------------
+				// 						Update
+				//--------------------------------------------------------
+				if(operation == 'update'){
+					const worldId = this.getNodeParameter('worldId', itemIndex, '') as string;
+					const id = this.getNodeParameter('id', itemIndex, '') as string;
+					const endpoint = `${worldId}/${resource}/${id}`;
+					const body = this.getNodeParameter('body', itemIndex, '') as string;
+					let requestBody:IDataObject = {};
+					if(body.length >0){
+						try {
+							requestBody = JSON.parse(body);
+						} catch (error) {
+							throw new NodeOperationError(this.getNode(), 'Request body is not valid JSON.');
+						}
+					}
+					item = items[itemIndex];
+					const newItem: INodeExecutionData = {
+						json: {},
+						binary: {},
+					};
+					newItem.json = await ocilionApiRequest.call(this,'Put', endpoint, requestBody, {},cookie);
+					returnItems.push(newItem);
+				}
+				
 				//--------------------------------------------------------
 				// 						GetAll
 				//--------------------------------------------------------

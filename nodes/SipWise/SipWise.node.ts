@@ -38,7 +38,15 @@ export class SipWise implements INodeType {
 					{
 						name: 'Customercontacts',
 						value: 'customercontacts',
-					}
+					},
+					{
+						name: 'Subscriber',
+						value: 'subscribers',
+					},
+					{
+						name: 'SubscriberPreferences',
+						value: 'subscriberpreferences',
+					},
 				],
 				default: 'customers',
 				description: 'Resource to use',
