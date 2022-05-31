@@ -127,6 +127,7 @@ class EasyProvisioning {
                             operation: [
                                 'get',
                                 'delete',
+                                'update',
                             ],
                         },
                     },

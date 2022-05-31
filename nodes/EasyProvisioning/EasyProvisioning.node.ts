@@ -131,6 +131,7 @@ export class EasyProvisioning implements INodeType {
 						operation:[
 							'get',
 							'delete',
+							'update',
 						],
 					},
 				},
