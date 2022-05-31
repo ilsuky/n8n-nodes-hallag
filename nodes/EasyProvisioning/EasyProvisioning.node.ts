@@ -109,6 +109,11 @@ export class EasyProvisioning implements INodeType {
 						description: 'Retrieve all records',
 					},
 					{
+						name: 'Update',
+						value: 'update',
+						description: 'Update a record',
+					},					
+					{
 						name: 'Delete',
 						value: 'delete',
 						description: 'Delete a record',
@@ -239,6 +244,7 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						operation:[
 							'create',
+							'update',
 						],
 					},
 				},
@@ -339,6 +345,35 @@ export class EasyProvisioning implements INodeType {
 
 					} while (data.links.next);
 				}
+
+				//--------------------------------------------------------
+				// 						Update
+				//--------------------------------------------------------
+				if(operation == 'update'){
+					const id = this.getNodeParameter('id', itemIndex, '') as string;
+					const endpoint = `${resource}/${id}`;
+					const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []) as INodeParameters[];
+					item = items[itemIndex];
+					
+					
+					const attributes:IDataObject ={};
+					for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
+						attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
+					};
+					const toCreate:IDataObject ={};
+					toCreate.data ={
+						"type": resource,
+						attributes
+					};
+					
+					console.log(toCreate);
+					const newItem: INodeExecutionData = {
+						json: {},
+						binary: {},
+					};
+					newItem.json = await easyProvisioningApiRequest.call(this,'Put', endpoint, toCreate, {},token);
+					returnItems.push(newItem);
+				}	
 
 				//--------------------------------------------------------
 				// 						Create

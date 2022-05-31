@@ -105,6 +105,11 @@ class EasyProvisioning {
                             description: 'Retrieve all records',
                         },
                         {
+                            name: 'Update',
+                            value: 'update',
+                            description: 'Update a record',
+                        },
+                        {
                             name: 'Delete',
                             value: 'delete',
                             description: 'Delete a record',
@@ -235,6 +240,7 @@ class EasyProvisioning {
                         show: {
                             operation: [
                                 'create',
+                                'update',
                             ],
                         },
                     },
@@ -307,6 +313,29 @@ class EasyProvisioning {
                             return this.prepareOutputData(returnItems.slice(0, limit));
                         }
                     } while (data.links.next);
+                }
+                if (operation == 'update') {
+                    const id = this.getNodeParameter('id', itemIndex, '');
+                    const endpoint = `${resource}/${id}`;
+                    const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []);
+                    item = items[itemIndex];
+                    const attributes = {};
+                    for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
+                        attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
+                    }
+                    ;
+                    const toCreate = {};
+                    toCreate.data = {
+                        "type": resource,
+                        attributes
+                    };
+                    console.log(toCreate);
+                    const newItem = {
+                        json: {},
+                        binary: {},
+                    };
+                    newItem.json = await GenericFunctions_1.easyProvisioningApiRequest.call(this, 'Put', endpoint, toCreate, {}, token);
+                    returnItems.push(newItem);
                 }
                 if (operation == 'create') {
                     const endpoint = resource;
