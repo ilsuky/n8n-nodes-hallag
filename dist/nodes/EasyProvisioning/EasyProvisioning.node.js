@@ -46,6 +46,10 @@ class EasyProvisioning {
                             value: 'internet_services',
                         },
                         {
+                            name: 'Devices',
+                            value: 'devices',
+                        },
+                        {
                             name: 'Voice lines',
                             value: 'voice_lines',
                         },

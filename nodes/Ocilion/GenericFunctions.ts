@@ -57,7 +57,7 @@ export async function ocilionApiRequest(
 }
 
 /**
- * Get a Cookie based on Easy provisioning account username and password.
+ * Get a Cookie based on Ocilion account username and password.
  */
  export async function getCookie(
 	this: IExecuteFunctions | ILoadOptionsFunctions,
