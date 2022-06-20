@@ -84,6 +84,7 @@ class EasyProvisioning {
                                 'installations',
                                 'internet_accesses',
                                 'internet_services',
+                                'devices',
                                 'voice_lines',
                                 'voice_services',
                                 'tv_services',

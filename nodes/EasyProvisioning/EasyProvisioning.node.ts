@@ -88,6 +88,7 @@ export class EasyProvisioning implements INodeType {
 							'installations',
 							'internet_accesses',
 							'internet_services',
+							'devices',
 							'voice_lines',
 							'voice_services',
 							'tv_services',
