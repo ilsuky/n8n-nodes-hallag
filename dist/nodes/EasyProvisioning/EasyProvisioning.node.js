@@ -346,10 +346,6 @@ class EasyProvisioning {
                     const relationshipsInput = this.getNodeParameter('relationships', itemIndex, '');
                     const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []);
                     item = items[itemIndex];
-                    let relationships = {};
-                    if (relationshipsInput && relationshipsInput.length > 0) {
-                        relationships = JSON.parse(relationshipsInput);
-                    }
                     const attributes = {};
                     for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
                         attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
@@ -359,7 +355,7 @@ class EasyProvisioning {
                     toCreate.data = {
                         "type": resource,
                         attributes,
-                        relationships
+                        "relationships": relationshipsInput,
                     };
                     console.log(toCreate);
                     const newItem = {
@@ -374,10 +370,6 @@ class EasyProvisioning {
                     const relationshipsInput = this.getNodeParameter('relationships', itemIndex, '');
                     const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []);
                     item = items[itemIndex];
-                    let relationships = {};
-                    if (relationshipsInput && relationshipsInput.length > 0) {
-                        relationships = JSON.parse(relationshipsInput);
-                    }
                     const attributes = {};
                     for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
                         attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
@@ -387,7 +379,7 @@ class EasyProvisioning {
                     toCreate.data = {
                         "type": resource,
                         attributes,
-                        relationships
+                        "relationships": relationshipsInput,
                     };
                     console.log(toCreate);
                     const newItem = {
