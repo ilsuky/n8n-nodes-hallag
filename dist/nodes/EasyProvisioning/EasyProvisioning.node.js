@@ -351,11 +351,15 @@ class EasyProvisioning {
                         attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
                     }
                     ;
+                    let relationships = {};
+                    if (relationshipsInput && relationshipsInput.length > 0) {
+                        relationships = JSON.parse(relationshipsInput);
+                    }
                     const toCreate = {};
                     toCreate.data = {
                         "type": resource,
                         attributes,
-                        "relationships": relationshipsInput,
+                        "relationships": relationships,
                     };
                     console.log(toCreate);
                     const newItem = {
@@ -375,11 +379,15 @@ class EasyProvisioning {
                         attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
                     }
                     ;
+                    let relationships = {};
+                    if (relationshipsInput && relationshipsInput.length > 0) {
+                        relationships = JSON.parse(relationshipsInput);
+                    }
                     const toCreate = {};
                     toCreate.data = {
                         "type": resource,
                         attributes,
-                        "relationships": relationshipsInput,
+                        "relationships": relationships,
                     };
                     console.log(toCreate);
                     const newItem = {

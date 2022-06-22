@@ -387,11 +387,16 @@ export class EasyProvisioning implements INodeType {
 						attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
 					};
 					
+					let relationships = {};
+					if(relationshipsInput && relationshipsInput.length>0){
+						relationships = JSON.parse(relationshipsInput);
+					}
+					
 					const toCreate:IDataObject ={};
 					toCreate.data ={
 						"type": resource,
 						attributes,
-						"relationships": relationshipsInput,
+						"relationships": relationships,
 					};
 					
 					console.log(toCreate);
@@ -416,12 +421,17 @@ export class EasyProvisioning implements INodeType {
 					for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
 						attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
 					};
+
+					let relationships = {};
+					if(relationshipsInput && relationshipsInput.length>0){
+						relationships = JSON.parse(relationshipsInput);
+					}
 					
 					const toCreate:IDataObject ={};
 					toCreate.data = {
 						"type": resource,
 						attributes,
-						"relationships": relationshipsInput,
+						"relationships": relationships,
 					};
 					
 					console.log(toCreate);
