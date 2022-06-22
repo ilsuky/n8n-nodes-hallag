@@ -263,36 +263,9 @@ export class EasyProvisioning implements INodeType {
 			{
 				displayName: 'Relationships to Set',
 				name: 'relationships',
-				placeholder: 'Add Value',
-				type: 'fixedCollection',
-				typeOptions: {
-					multipleValues: true,
-					sortable: true,
-				},
-				description: 'The value to set.',
-				default: {},
-				options: [
-					{
-						name: 'attributes',
-						displayName: 'Attributes',
-						values: [
-							{
-								displayName: 'Name',
-								name: 'name',
-								type: 'string',
-								default: '',
-								description: 'Name of value to set',
-							},
-							{
-								displayName: 'Value',
-								name: 'value',
-								type: 'string',
-								default: '',
-								description: 'Value to set.',
-							},
-						],
-					},
-				],
+				type: 'json',
+				default: '',
+				description: '',
 				displayOptions: {
 					show: {
 						operation:[
@@ -300,7 +273,7 @@ export class EasyProvisioning implements INodeType {
 							'update',
 						],
 					},
-				},
+				},				
 			},			
 		],
 	};
@@ -405,16 +378,15 @@ export class EasyProvisioning implements INodeType {
 				if(operation == 'update'){
 					const id = this.getNodeParameter('id', itemIndex, '') as string;
 					const endpoint = `${resource}/${id}`;
-					const relationshipsInput = this.getNodeParameter('relationships.attributes', itemIndex, []) as INodeParameters[];
+					const relationshipsInput = this.getNodeParameter('relationships', itemIndex, '') as string;
 					const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []) as INodeParameters[];
 					item = items[itemIndex];
 					
+					let relationships = {};
+					if(relationshipsInput && relationshipsInput.length>0){
+						relationships = JSON.parse(relationshipsInput);
+					}
 					
-					const relationships:IDataObject ={};
-					for (let relationshipsIndex = 0; relationshipsIndex < relationshipsInput.length; relationshipsIndex++) {
-						relationships[`${relationshipsInput[relationshipsIndex].name}`] = relationshipsInput[relationshipsIndex].value;
-					};
-
 					const attributes:IDataObject ={};
 					for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
 						attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
@@ -441,15 +413,14 @@ export class EasyProvisioning implements INodeType {
 				//--------------------------------------------------------
 				if(operation == 'create'){
 					const endpoint = resource;
-					const relationshipsInput = this.getNodeParameter('relationships.attributes', itemIndex, []) as INodeParameters[];
+					const relationshipsInput = this.getNodeParameter('relationships', itemIndex, '') as string;
 					const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []) as INodeParameters[];
 					item = items[itemIndex];
 					
-					
-					const relationships:IDataObject ={};
-					for (let relationshipsIndex = 0; relationshipsIndex < relationshipsInput.length; relationshipsIndex++) {
-						relationships[`${relationshipsInput[relationshipsIndex].name}`] = relationshipsInput[relationshipsIndex].value;
-					};
+					let relationships = {};
+					if(relationshipsInput && relationshipsInput.length>0){
+						relationships = JSON.parse(relationshipsInput);
+					}
 
 					const attributes:IDataObject ={};
 					for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
