@@ -46,6 +46,10 @@ class EasyProvisioning {
                             value: 'internet_services',
                         },
                         {
+                            name: 'Credentials',
+                            value: 'credentials',
+                        },
+                        {
                             name: 'Devices',
                             value: 'devices',
                         },
@@ -84,6 +88,7 @@ class EasyProvisioning {
                                 'installations',
                                 'internet_accesses',
                                 'internet_services',
+                                'credentials',
                                 'devices',
                                 'voice_lines',
                                 'voice_services',

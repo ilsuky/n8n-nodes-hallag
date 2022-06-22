@@ -50,6 +50,10 @@ export class EasyProvisioning implements INodeType {
 						value: 'internet_services',
 					},
 					{
+						name: 'Credentials',
+						value: 'credentials',
+					},					
+					{
 						name: 'Devices',
 						value: 'devices',
 					},					
@@ -88,6 +92,7 @@ export class EasyProvisioning implements INodeType {
 							'installations',
 							'internet_accesses',
 							'internet_services',
+							'credentials',
 							'devices',
 							'voice_lines',
 							'voice_services',
