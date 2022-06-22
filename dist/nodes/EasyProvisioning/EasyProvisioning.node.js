@@ -256,6 +256,48 @@ class EasyProvisioning {
                         },
                     },
                 },
+                {
+                    displayName: 'Relationships to Set',
+                    name: 'relationships',
+                    placeholder: 'Add Value',
+                    type: 'fixedCollection',
+                    typeOptions: {
+                        multipleValues: true,
+                        sortable: true,
+                    },
+                    description: 'The value to set.',
+                    default: {},
+                    options: [
+                        {
+                            name: 'attributes',
+                            displayName: 'Attributes',
+                            values: [
+                                {
+                                    displayName: 'Name',
+                                    name: 'name',
+                                    type: 'string',
+                                    default: '',
+                                    description: 'Name of value to set',
+                                },
+                                {
+                                    displayName: 'Value',
+                                    name: 'value',
+                                    type: 'string',
+                                    default: '',
+                                    description: 'Value to set.',
+                                },
+                            ],
+                        },
+                    ],
+                    displayOptions: {
+                        show: {
+                            operation: [
+                                'create',
+                                'update',
+                            ],
+                        },
+                    },
+                },
             ],
         };
     }
@@ -328,8 +370,14 @@ class EasyProvisioning {
                 if (operation == 'update') {
                     const id = this.getNodeParameter('id', itemIndex, '');
                     const endpoint = `${resource}/${id}`;
+                    const relationshipsInput = this.getNodeParameter('relationships.attributes', itemIndex, []);
                     const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []);
                     item = items[itemIndex];
+                    const relationships = {};
+                    for (let relationshipsIndex = 0; relationshipsIndex < relationshipsInput.length; relationshipsIndex++) {
+                        relationships[`${relationshipsInput[relationshipsIndex].name}`] = relationshipsInput[relationshipsIndex].value;
+                    }
+                    ;
                     const attributes = {};
                     for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
                         attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
@@ -338,7 +386,8 @@ class EasyProvisioning {
                     const toCreate = {};
                     toCreate.data = {
                         "type": resource,
-                        attributes
+                        attributes,
+                        relationships
                     };
                     console.log(toCreate);
                     const newItem = {
@@ -350,8 +399,14 @@ class EasyProvisioning {
                 }
                 if (operation == 'create') {
                     const endpoint = resource;
+                    const relationshipsInput = this.getNodeParameter('relationships.attributes', itemIndex, []);
                     const attributesInput = this.getNodeParameter('values.attributes', itemIndex, []);
                     item = items[itemIndex];
+                    const relationships = {};
+                    for (let relationshipsIndex = 0; relationshipsIndex < relationshipsInput.length; relationshipsIndex++) {
+                        relationships[`${relationshipsInput[relationshipsIndex].name}`] = relationshipsInput[relationshipsIndex].value;
+                    }
+                    ;
                     const attributes = {};
                     for (let attributesIndex = 0; attributesIndex < attributesInput.length; attributesIndex++) {
                         attributes[`${attributesInput[attributesIndex].name}`] = attributesInput[attributesIndex].value;
@@ -360,7 +415,8 @@ class EasyProvisioning {
                     const toCreate = {};
                     toCreate.data = {
                         "type": resource,
-                        attributes
+                        attributes,
+                        relationships
                     };
                     console.log(toCreate);
                     const newItem = {
