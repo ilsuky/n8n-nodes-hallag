@@ -60,6 +60,10 @@ export class OdooRest implements INodeType {
 						value: 'sale.order.line',
 					},
 					{
+						name: 'Sale Order Line Dynamic Info',
+						value: 'product.dynamic.info',
+					},					
+					{
 						name: 'LogNote',
 						value: 'mail.message',
 					},
