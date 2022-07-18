@@ -115,6 +115,11 @@ class EasyProvisioning {
                             description: 'Retrieve all records',
                         },
                         {
+                            name: 'Pagination',
+                            value: 'pagination',
+                            description: 'Retrieve pagination',
+                        },
+                        {
                             name: 'Update',
                             value: 'update',
                             description: 'Update a record',
@@ -194,11 +199,26 @@ class EasyProvisioning {
                         show: {
                             operation: [
                                 'getAll',
+                                'pagination',
                             ],
                         },
                     },
                     default: true,
                     description: 'Retrieve and Split Data array into seperate Items',
+                },
+                {
+                    displayName: 'Page',
+                    name: 'page',
+                    type: 'number',
+                    displayOptions: {
+                        show: {
+                            operation: [
+                                'pagination',
+                            ],
+                        },
+                    },
+                    default: 1,
+                    description: 'Current Page',
                 },
                 {
                     displayName: 'Limit',
@@ -208,6 +228,7 @@ class EasyProvisioning {
                         show: {
                             operation: [
                                 'getAll',
+                                'pagination',
                             ],
                         },
                     },
@@ -297,6 +318,35 @@ class EasyProvisioning {
                     };
                     newItem.json = datajson;
                     returnItems.push(newItem);
+                }
+                if (operation == 'pagination') {
+                    const split = this.getNodeParameter('split', itemIndex, '');
+                    const limit = this.getNodeParameter('limit', itemIndex, '');
+                    const page = this.getNodeParameter('page', itemIndex, '');
+                    const endpoint = resource;
+                    let qs = {};
+                    qs[`page[number]`] = page;
+                    qs[`page[size]`] = limit;
+                    const data = await GenericFunctions_1.easyProvisioningApiRequest.call(this, 'Get', endpoint, {}, qs, token);
+                    if (split) {
+                        const datajson = data.data;
+                        for (let dataIndex = 0; dataIndex < datajson.length; dataIndex++) {
+                            const newItem = {
+                                json: {},
+                                binary: {},
+                            };
+                            newItem.json = datajson[dataIndex];
+                            returnItems.push(newItem);
+                        }
+                    }
+                    else {
+                        const newItem = {
+                            json: {},
+                            binary: {},
+                        };
+                        newItem.json = data;
+                        returnItems.push(newItem);
+                    }
                 }
                 if (operation == 'getAll') {
                     const split = this.getNodeParameter('split', itemIndex, '');

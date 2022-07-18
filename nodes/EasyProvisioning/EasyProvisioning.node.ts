@@ -119,6 +119,11 @@ export class EasyProvisioning implements INodeType {
 						description: 'Retrieve all records',
 					},
 					{
+						name: 'Pagination',
+						value: 'pagination',
+						description: 'Retrieve pagination',						
+					},
+					{
 						name: 'Update',
 						value: 'update',
 						description: 'Update a record',
@@ -198,12 +203,27 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						operation:[
 							'getAll',
+							'pagination',
 						],
 					},
 				},
 				default: true,
 				description: 'Retrieve and Split Data array into seperate Items',
 			},
+			{
+				displayName: 'Page',
+				name: 'page',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation:[
+							'pagination',
+						],
+					},
+				},
+				default: 1,
+				description: 'Current Page',
+			},			
 			{
 				displayName: 'Limit',
 				name: 'limit',
@@ -212,6 +232,7 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						operation:[
 							'getAll',
+							'pagination',
 						],
 					},
 				},
@@ -316,6 +337,44 @@ export class EasyProvisioning implements INodeType {
 					returnItems.push(newItem);
 						
 				}
+
+				//--------------------------------------------------------
+				// 						Pagination
+				//--------------------------------------------------------
+				if(operation == 'pagination'){
+					const split = this.getNodeParameter('split', itemIndex, '') as boolean;
+					const limit = this.getNodeParameter('limit', itemIndex, '') as number;
+					const page = this.getNodeParameter('page', itemIndex, '') as number;
+					const endpoint = resource;
+					
+					let qs:IDataObject = {};
+					qs[`page[number]`] = page;
+					qs[`page[size]`] = limit;
+					
+					const data = await easyProvisioningApiRequest.call(this,'Get', endpoint, {}, qs ,token);
+					
+					if(split){
+						//const data = await easyProvisioningApiRequest.call(this,'Get', endpoint, {}, qs ,token);
+						const datajson = data.data;
+						for (let dataIndex = 0; dataIndex < datajson.length; dataIndex++) {
+							const newItem: INodeExecutionData = {
+								json: {},
+								binary: {},
+							};
+							newItem.json = datajson[dataIndex];
+							returnItems.push(newItem);
+						}
+					}
+					else{
+						const newItem: INodeExecutionData = {
+							json: {},
+							binary: {},
+						};
+						newItem.json = data;
+						returnItems.push(newItem);
+					}	
+						
+				}					
 
 				//--------------------------------------------------------
 				// 						GetAll
