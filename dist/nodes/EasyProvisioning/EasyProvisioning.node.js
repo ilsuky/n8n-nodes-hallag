@@ -327,9 +327,16 @@ class EasyProvisioning {
                     const limit = this.getNodeParameter('limit', itemIndex, '');
                     const page = this.getNodeParameter('page', itemIndex, '');
                     const endpoint = resource;
+                    const filterAttribute = this.getNodeParameter('filterAttribute', itemIndex, '');
+                    const filterOperation = this.getNodeParameter('filterOperation', itemIndex, '');
+                    const filterkey = filterAttribute + '_' + filterOperation;
+                    const filterValue = this.getNodeParameter('filterValue', itemIndex, '');
                     let qs = {};
                     qs[`page[number]`] = page;
                     qs[`page[size]`] = limit;
+                    if (filterAttribute.length > 0) {
+                        qs[`filter[${filterkey}]`] = filterValue;
+                    }
                     const data = await GenericFunctions_1.easyProvisioningApiRequest.call(this, 'Get', endpoint, {}, qs, token);
                     if (split) {
                         const datajson = data.data;

@@ -350,9 +350,20 @@ export class EasyProvisioning implements INodeType {
 					const page = this.getNodeParameter('page', itemIndex, '') as number;
 					const endpoint = resource;
 					
+					const filterAttribute = this.getNodeParameter('filterAttribute', itemIndex, '') as string;
+					const filterOperation = this.getNodeParameter('filterOperation', itemIndex, '') as string;
+					const filterkey = filterAttribute+'_'+filterOperation;
+					const filterValue = this.getNodeParameter('filterValue', itemIndex, '') as string;
+					
+					
 					let qs:IDataObject = {};
 					qs[`page[number]`] = page;
 					qs[`page[size]`] = limit;
+					
+					if(filterAttribute.length>0){
+						qs[`filter[${filterkey}]`] = filterValue;
+					}
+					
 					
 					const data = await easyProvisioningApiRequest.call(this,'Get', endpoint, {}, qs ,token);
 					
