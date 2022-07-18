@@ -159,6 +159,7 @@ class EasyProvisioning {
                         show: {
                             operation: [
                                 'getAll',
+                                'pagination',
                             ],
                         },
                     },
@@ -173,6 +174,7 @@ class EasyProvisioning {
                         show: {
                             operation: [
                                 'getAll',
+                                'pagination',
                             ],
                         },
                     },
@@ -187,6 +189,7 @@ class EasyProvisioning {
                         show: {
                             operation: [
                                 'getAll',
+                                'pagination',
                             ],
                         },
                     },

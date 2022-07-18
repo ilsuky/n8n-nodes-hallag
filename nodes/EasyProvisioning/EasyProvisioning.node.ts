@@ -163,6 +163,7 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						operation:[
 							'getAll',
+							'pagination',
 						],
 					},
 				},
@@ -177,6 +178,7 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						operation:[
 							'getAll',
+							'pagination',
 						],
 					},
 				},
@@ -191,6 +193,7 @@ export class EasyProvisioning implements INodeType {
 					show: {
 						operation:[
 							'getAll',
+							'pagination',
 						],
 					},
 				},
