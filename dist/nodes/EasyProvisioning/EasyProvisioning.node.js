@@ -337,6 +337,7 @@ class EasyProvisioning {
                     if (filterAttribute.length > 0) {
                         qs[`filter[${filterkey}]`] = filterValue;
                     }
+                    console.log(qs);
                     const data = await GenericFunctions_1.easyProvisioningApiRequest.call(this, 'Get', endpoint, {}, qs, token);
                     if (split) {
                         const datajson = data.data;

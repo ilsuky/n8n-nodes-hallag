@@ -364,11 +364,11 @@ export class EasyProvisioning implements INodeType {
 						qs[`filter[${filterkey}]`] = filterValue;
 					}
 					
+					console.log(qs);
 					
 					const data = await easyProvisioningApiRequest.call(this,'Get', endpoint, {}, qs ,token);
 					
 					if(split){
-						//const data = await easyProvisioningApiRequest.call(this,'Get', endpoint, {}, qs ,token);
 						const datajson = data.data;
 						for (let dataIndex = 0; dataIndex < datajson.length; dataIndex++) {
 							const newItem: INodeExecutionData = {
