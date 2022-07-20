@@ -184,6 +184,20 @@ export class OdooRest implements INodeType {
 				description: 'Fields to retrieve',
 			},
 			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation:[
+							'get',
+						],
+					},
+				},
+				default: 10,
+				description: 'Limit the items Retrieved',
+			},			
+			{
 				displayName: 'Retrieve and Split Data Items',
 				name: 'split',
 				type: 'boolean',
@@ -223,12 +237,14 @@ export class OdooRest implements INodeType {
 					const domain = this.getNodeParameter('domain', itemIndex, '') as string;
 					const fields = this.getNodeParameter('fields', itemIndex, '') as string;
 					const split = this.getNodeParameter('split', itemIndex, '') as boolean;
+					const limit = this.getNodeParameter('limit', itemIndex, '') as string;
 					const endpoint = resource + '/search';
 					
 					const qs =
 									{	
 										domain: `${domain}`,
-										fields: `${fields}`
+										fields: `${fields}`,
+										limit: `${limit}`
 									}
 								;
 					item = items[itemIndex];

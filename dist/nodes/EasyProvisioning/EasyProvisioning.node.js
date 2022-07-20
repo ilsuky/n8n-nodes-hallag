@@ -309,7 +309,6 @@ class EasyProvisioning {
         for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
             try {
                 if (operation == 'get') {
-                    const split = this.getNodeParameter('split', itemIndex, '');
                     const id = this.getNodeParameter('id', itemIndex, '');
                     const endpoint = `${resource}/${id}`;
                     item = items[itemIndex];

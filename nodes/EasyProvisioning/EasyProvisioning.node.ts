@@ -322,7 +322,6 @@ export class EasyProvisioning implements INodeType {
 				// 						Get
 				//--------------------------------------------------------
 				if(operation == 'get'){
-					const split = this.getNodeParameter('split', itemIndex, '') as boolean;
 					const id = this.getNodeParameter('id', itemIndex, '') as string;
 					
 					const endpoint = `${resource}/${id}`;

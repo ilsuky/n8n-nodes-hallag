@@ -182,6 +182,20 @@ class OdooRest {
                     description: 'Fields to retrieve',
                 },
                 {
+                    displayName: 'Limit',
+                    name: 'limit',
+                    type: 'number',
+                    displayOptions: {
+                        show: {
+                            operation: [
+                                'get',
+                            ],
+                        },
+                    },
+                    default: 10,
+                    description: 'Limit the items Retrieved',
+                },
+                {
                     displayName: 'Retrieve and Split Data Items',
                     name: 'split',
                     type: 'boolean',
@@ -212,10 +226,12 @@ class OdooRest {
                     const domain = this.getNodeParameter('domain', itemIndex, '');
                     const fields = this.getNodeParameter('fields', itemIndex, '');
                     const split = this.getNodeParameter('split', itemIndex, '');
+                    const limit = this.getNodeParameter('limit', itemIndex, '');
                     const endpoint = resource + '/search';
                     const qs = {
                         domain: `${domain}`,
-                        fields: `${fields}`
+                        fields: `${fields}`,
+                        limit: `${limit}`
                     };
                     item = items[itemIndex];
                     if (split) {
