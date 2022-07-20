@@ -190,7 +190,7 @@ export class OdooRest implements INodeType {
 				displayOptions: {
 					show: {
 						operation:[
-							'get',
+							'search',
 						],
 					},
 				},

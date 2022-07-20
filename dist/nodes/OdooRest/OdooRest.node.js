@@ -188,7 +188,7 @@ class OdooRest {
                     displayOptions: {
                         show: {
                             operation: [
-                                'get',
+                                'search',
                             ],
                         },
                     },
