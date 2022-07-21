@@ -70,7 +70,15 @@ export class OdooRest implements INodeType {
 					{
 						name: 'Domains',
 						value: 'web.domain.info',
-					},					
+					},	
+					{
+						name: 'CPE',
+						value: 'cpe.dynamic.info',
+					},	
+					{
+						name: 'Set-Top-Box',
+						value: 'settop.dynamic.info',
+					},						
 					{
 						name: 'LogNote',
 						value: 'mail.message',
